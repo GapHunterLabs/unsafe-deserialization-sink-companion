@@ -1,0 +1,38 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <id>dev.gaphunter.unsafedeserializationsinkcompanion</id>
+    <name>Unsafe Deserialization Sink Companion</name>
+    <vendor>Gap Hunter Labs</vendor>
+    <description><![CDATA[
+        <p>Warning on a <code>new ObjectInputStream(...).readObject()</code>
+        call inside a Spring MVC/JAX-RS endpoint method whose constructor
+        argument traces back (within the same method, one direct hop) to
+        an untrusted parameter -- CWE-502, Deserialization of Untrusted
+        Data, one of the most-cited OWASP Top 10 categories for Java, a
+        real path to remote code execution via gadget chains.</p>
+        <p>Same source-to-sink principle CodeQL uses for this exact
+        category, implemented with PSI alone -- no external analysis
+        engine, no CI pipeline. CodeQL covers this as a batch/CI query,
+        not an inline IDE inspection; no Marketplace plugin found with
+        this specific mechanism.</p>
+        <p>Stated honestly: v0.1 only follows the data within the SAME
+        method and one direct hop to a parameter -- never crosses more
+        than one method of distance. The untrusted source is a closed
+        list of known Spring MVC/JAX-RS controller signatures, not a
+        general taint analysis of the whole project.</p>
+        <p>Free. No license nags, no telemetry, no network calls.</p>
+    ]]></description>
+
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.java</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <localInspection language="JAVA"
+            groupName="Unsafe Deserialization Sink Companion"
+            displayName="Untrusted data deserialized via ObjectInputStream"
+            enabledByDefault="true"
+            level="WARNING"
+            implementationClass="dev.gaphunter.unsafedeserializationsinkcompanion.inspection.DeserializationSinkInspection"/>
+        <notificationGroup id="Unsafe Deserialization Sink Companion" displayType="BALLOON"/>
+    </extensions>
+</idea-plugin>
