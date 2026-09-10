@@ -5,6 +5,16 @@ Spring MVC/JAX-RS endpoint method whose constructor argument traces
 back (within the same method, one direct hop) to an untrusted
 parameter -- CWE-502, Deserialization of Untrusted Data.
 
+## Screenshots
+
+![Screenshot 1](docs/screenshots/Screenshot_1.png)
+
+![Screenshot 2](docs/screenshots/Screenshot_2.png)
+
+![Screenshot 3](docs/screenshots/Screenshot_3.png)
+
+![Screenshot 4](docs/screenshots/Screenshot_4.png)
+
 ## Why it exists
 
 One of the most-cited OWASP Top 10 categories for Java, and a real
