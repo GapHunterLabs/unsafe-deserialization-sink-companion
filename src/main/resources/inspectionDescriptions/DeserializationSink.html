@@ -1,0 +1,9 @@
+<html>
+<body>
+Reports <code>new ObjectInputStream(...).readObject()</code> in a Spring MVC or JAX-RS endpoint method when the stream
+comes, within the same method, from an untrusted parameter.
+<!-- tooltip end -->
+<p>Deserializing untrusted data can run attacker-chosen code through gadget chains (CWE-502). Use a data format such
+as JSON with explicit types, or restrict the accepted classes with an <code>ObjectInputFilter</code>.</p>
+</body>
+</html>
